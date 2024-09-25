@@ -1,0 +1,64 @@
+# Ignore git and version control
+.git
+.gitignore
+
+# Ignore node modules
+node_modules/
+
+# Ignore npm debug logs
+npm-debug.log
+
+# Ignore the frontend source files (since we're deploying the built version)
+frontend/src/
+frontend/node_modules/
+frontend/e2e/
+frontend/.angular/
+
+# Ignore development and CI files
+*.spec.ts
+*.test.js
+.editorconfig
+.prettierrc
+.eslintrc
+.travis.yml
+.circleci/
+
+# Ignore environment files
+.env
+*.env.local
+*.env.development
+*.env.test
+*.env.production
+
+# Ignore any local SSL certificates
+*.pem
+*.key
+*.crt
+
+# Ignore logs
+*.log
+
+# Ignore OS generated files
+.DS_Store
+Thumbs.db
+
+# Ignore IDE specific files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Ignore build artifacts and cache directories
+dist/
+tmp/
+out-tsc/
+.sass-cache/
+connect.lock
+coverage/
+libpeerconnection.log
+testem.log
+typings/
+
+# Ignore other unnecessary files
+*.md
+LICENSE

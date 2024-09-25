@@ -1,0 +1,8 @@
+runtime: nodejs20
+env: standard
+env_variables:
+  NODE_ENV: "production"
+  USE_SECURE_COOKIES: "true"
+  ALLOWED_ORIGINS: "https://meta80.appspot.com,https://meta80.lm.r.appspot.com"
+  MONGODB_URI: "mongodb+srv://MantisTobogganMD:K0YxAu5x2KwNuxhW@troglodytedb.zfvfao0.mongodb.net/CAFilms"
+  SESSION_SECRET: "kYFgNdMmn1zaFs8"
