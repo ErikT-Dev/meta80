@@ -1,0 +1,80 @@
+.sidenav-container {
+    margin-top: 8.5em;
+    flex: 1;
+    background: linear-gradient(135deg,
+            #f5f5f5 0%,
+            #e0e0e0 50%,
+            #bdbdbd 100%);
+    min-height: 100%;
+}
+
+mat-sidenav {
+    width: 16em;
+    background-color: rgb(228, 235, 228);
+    height: 100%;
+    overflow: hidden;
+    background-image: url('../../../assets/autumn-studio-221wufG10eg-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+/* To ensure text is readable over the image */
+mat-sidenav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(228, 235, 228, 0.9);
+    /* Adjust the last value (0.7) to change opacity */
+    z-index: -1;
+}
+
+.main-content {
+    background-image: url('../../../assets/rene-bohmer-YeUVDKZWSZ4-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    padding-top: 1rem;
+    min-height: 60rem;
+}
+
+/* To ensure text is readable over the image */
+.main-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(163, 185, 166, 0.7);
+    /* Adjust the last value (0.7) to change opacity */
+    z-index: 1;
+}
+
+.sort-container {
+    display: flex;
+    align-items: start;
+    padding: 1.3em 1em 0.3em 1em;
+    background-color: #efefef;
+    height: 3em;
+    width: 95%;
+}
+
+::ng-deep .sort-options-panel {
+    max-height: none !important;
+}
+
+.filter-panel {
+    background-color: #efefef;
+}
+
+.sort-direction-button {
+    flex-shrink: 0;
+}
+
+.panel-title {
+    color: #4c5c4e;
+}

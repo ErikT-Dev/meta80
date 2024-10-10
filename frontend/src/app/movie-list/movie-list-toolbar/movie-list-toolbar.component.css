@@ -1,0 +1,350 @@
+.toolbar-container {
+    top: 0;
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+}
+
+.main-toolbar {
+    position: relative;
+    background-color: #283129;
+    color: #f7f2ee;
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    padding: 0.5em 1em;
+    justify-content: space-around;
+    background-image: url('../../../assets/olga-thelavart-vIdRMp8IpO0-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    border-bottom: 3px solid #ecf2ec;
+    overflow: hidden;
+    height: 4.4rem;
+}
+
+/* To ensure text is readable over the image */
+.main-toolbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: #28312980;
+    /* Adjust the last value (0.7) to change opacity */
+    z-index: 1;
+}
+
+/* Ensure toolbar content is above the overlay */
+.main-toolbar>* {
+    position: relative;
+    z-index: 2;
+}
+
+.toolbar-extension {
+    position: relative;
+    background-color: #e4ebe4;
+    padding: 0.5em 1em;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-image: url('../../../assets/autumn-studio-221wufG10eg-unsplash.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 3.6rem;
+    overflow: hidden;
+}
+
+/* To ensure text is readable over the image */
+.toolbar-extension::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(228, 235, 228, 0.8);
+    /* Adjust the last value (0.7) to change opacity */
+    z-index: 1;
+}
+
+/* Ensure toolbar content is above the overlay */
+.toolbar-extension>* {
+    position: relative;
+    z-index: 2;
+}
+
+.rotate-icon {
+    transform: rotate(180deg);
+}
+
+/* If you want a smooth rotation animation, you can add: */
+.animate-icon {
+    transition: transform 0.3s ease;
+}
+
+/* You can combine these classes for a smooth rotation */
+.animate-icon.rotate-icon {
+    transform: rotate(-180deg);
+}
+
+
+.settings-button {
+    display: flex;
+    flex-direction: row;
+}
+
+.settings-button mat-icon {
+    color: #fffcf1;
+    margin-right: 0.3rem;
+}
+
+.settings-button span {
+    color: #fffcf1;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.filters-content {
+    padding: 1rem;
+}
+
+.filters-button {
+    display: flex;
+    flex-direction: row;
+    width: 10rem;
+}
+
+.filters-button mat-icon {
+    padding: 0.1rem;
+    margin: 0rem;
+    color: #4336ff;
+}
+
+.filters-button span {
+    color: #6b61f3;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+
+.big-spacer {
+    flex-grow: 0.3;
+}
+
+.small-spacer {
+    flex-grow: 0.1;
+}
+
+@media (max-width: 600px) {
+    .collapsible-menu {
+        display: none;
+    }
+}
+
+.page-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.main-toolbar button[mat-button] {
+    margin-left: 16px;
+}
+
+.main-toolbar button[mat-button],
+.main-toolbar button[mat-icon-button] {
+    margin-left: 8px;
+}
+
+.clear-filters-button {
+    margin-right: 16px;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.login-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.login-button {
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    color: #bbf8d0;
+}
+
+.small-phone {
+    color: #3e5547;
+}
+
+.clear-filter {
+    display: flex;
+    justify-content: center;
+    padding: 16px;
+}
+
+.username {
+    color: #bbf8d0;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    padding: 0.1em 0.3em;
+}
+
+.username span {
+    margin-left: 0.4rem;
+}
+
+.watch-list {
+    color: #fff0d6;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+}
+
+.watch-list.active {
+    color: #ffca6f;
+}
+
+.watch-list.active span {
+    text-decoration: underline;
+    text-shadow: 0 8px 8px rgba(255, 211, 134, 0.4);
+    filter: drop-shadow(0 2px 4px rgba(255, 202, 111, 0.1));
+}
+
+.watch-list.active mat-icon {
+    filter: drop-shadow(0 2px 4px rgba(255, 202, 111, 0.6));
+}
+
+.seen-list {
+    color: #e9e9ff;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+}
+
+.seen-list.active {
+    color: #999aff;
+
+}
+
+.seen-list.active span {
+    text-decoration: underline;
+    text-shadow: 0 8px 8px rgba(189, 190, 255, 0.3);
+    filter: drop-shadow(0 2px 4px rgba(189, 190, 255, 0.1));
+}
+
+.seen-list.active mat-icon {
+    filter: drop-shadow(0 2px 4px rgba(189, 190, 255, 0.3));
+}
+
+.custom-icon {
+    width: 1em;
+    height: 1em;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+}
+
+.title-text {
+    font-weight: 600;
+    color: #bbf8d0;
+}
+
+.website-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0em 2em;
+    width: 100%;
+}
+
+.main-text {
+    font-size: 0.95em;
+    font-weight: 500;
+    color: #3c3838;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+}
+
+.brackets-text {
+    font-size: 0.8em;
+    color: #6a6a6a;
+}
+
+.page-count {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+
+.page-number {
+    font-weight: 500;
+    line-height: 2em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.movies-count {
+    font-size: 0.9em;
+    color: #6a6a6a;
+}
+
+.total-movies {
+    font-weight: bold;
+}
+
+.active-filters {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 8px;
+    width: 100%;
+}
+
+.custom-toggle-group {
+    border: none;
+    border-radius: 0.8em;
+    height: 2.5em;
+    overflow: hidden;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.custom-toggle-group .mat-button-toggle {
+    background-color: transparent;
+    color: #5c6b62;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 0.8em;
+    font-weight: 500;
+}
+
+.custom-toggle-group .mat-button-toggle-checked {
+    background-color: #426b50;
+    color: white;
+}
+
+.custom-toggle-group .mat-button-toggle-focus-overlay {
+    display: none;
+}
+
+.custom-toggle-group .mat-icon {
+    vertical-align: middle;
+    margin-right: 4px;
+}

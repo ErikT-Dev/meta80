@@ -1,0 +1,234 @@
+:host {
+    --size: 3rem;
+    --details-width: calc(var(--size) * 2.366);
+}
+
+.movie-card {
+    display: block;
+    width: 100%;
+    max-width: calc(var(--size) * 5.7);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    cursor: pointer;
+    overflow: hidden;
+    background: linear-gradient(135deg, #eeebdd 0%, #c7bcae 100%);
+    z-index: 3;
+}
+
+.movie-card:hover {
+    transform: translateY(calc(var(--size) * -0.1));
+    box-shadow: 0 calc(var(--size) * 0.08) calc(var(--size) * 0.4) rgba(0, 0, 0, 0.1);
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.top-panel {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    padding: 0.5em 1em 0em 1em;
+}
+
+.middle-panel {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    margin-bottom: 0.2em;
+}
+
+.bottom-panel {
+    display: flex;
+    flex-direction: row;
+}
+
+.poster-container {
+    flex: 1;
+    height: 100%;
+    min-width: 120px;
+}
+
+.poster-image {
+    width: 100%;
+    object-fit: cover;
+    border-top-right-radius: calc(var(--size) * 0.08);
+    border-bottom-right-radius: calc(var(--size) * 0.08);
+}
+
+.details {
+    width: var(--details-width);
+    padding: 0 calc(var(--size) * 0.1);
+    max-height: calc(var(--details-width) * 1.5);
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
+/* For Webkit browsers like Chrome, Safari */
+.details::-webkit-scrollbar {
+    width: 6px;
+    /* Width of the entire scrollbar */
+}
+
+.details::-webkit-scrollbar-track {
+    background: transparent;
+    /* Color of the tracking area */
+}
+
+.details::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    /* Color of the scrollbar */
+    border-radius: 3px;
+    /* Roundness of the scrollbar */
+    border: 2px solid transparent;
+    /* Creates padding around scrollbar thumb */
+}
+
+/* Hide scrollbar arrows in Webkit browsers */
+.details::-webkit-scrollbar-button {
+    display: none;
+}
+
+.info-button {
+    font-size: calc(var(--size) * 0.18);
+    line-height: 1.2;
+    padding: calc(var(--size) * 0.18) calc(var(--size) * 0.08);
+    margin: calc(var(--size) * 0.06) calc(var(--size) * 0.05);
+    min-width: unset;
+    border-radius: calc(var(--size) * 0.07);
+}
+
+.genre-button {
+    background-color: #e2d3e8;
+}
+
+.country-button {
+    background-color: #d6dfd0;
+}
+
+.movie-title {
+    font-size: calc(var(--size) * 0.35);
+    white-space: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.2;
+    max-height: 2.4em;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+mat-card-subtitle {
+    font-size: calc(var(--size) * 0.23);
+}
+
+.subtitles {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.original-title {
+    font-size: calc(var(--size) * 0.23);
+    font-style: italic;
+    margin-left: 0.5em;
+}
+
+.info {
+    margin-bottom: calc(var(--size) * 0.2);
+}
+
+.directors {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    font-size: calc(var(--size) * 0.23);
+    margin-bottom: calc(var(--size) * 0.1);
+}
+
+.director {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    padding: 0.2em 0em;
+}
+
+.directors mat-icon {
+    font-size: calc(var(--size) * 0.3);
+    height: calc(var(--size) * 0.3);
+    width: calc(var(--size) * 0.3);
+    margin-right: calc(var(--size) * 0.1);
+}
+
+.director-link {
+    color: #1c1717;
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.director-link:hover {
+    text-decoration: underline;
+}
+
+.movie-year:hover {
+    text-decoration: underline;
+}
+
+.rating {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    width: 20%;
+}
+
+.rating:not(:last-child) {
+    border-right: 1px solid #e0e0e0;
+}
+
+.watchlist-active {
+    background-color: #d2b071;
+}
+
+.watch-icon-inactive {
+    color: #9c8356;
+}
+
+.watch-icon-active {
+    color: #c45800;
+}
+
+.seenlist-active {
+    background-color: #9ea0da;
+}
+
+.seen-icon-inactive {
+    color: #696a88;
+}
+
+.seen-icon-active {
+    color: #3f34d4;
+}
+
+.mc-rating {
+    background-color: #00ce7c85;
+}
+
+.rating-logo {
+    width: calc(var(--size) * 0.5);
+    height: auto;
+    margin-bottom: calc(var(--size) * 0.1);
+}
+
+.rating span {
+    font-size: calc(var(--size) * 0.18);
+    font-weight: bold;
+}

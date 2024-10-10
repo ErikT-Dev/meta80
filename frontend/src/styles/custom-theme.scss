@@ -1,0 +1,123 @@
+@use '@angular/material' as mat;
+
+// Include the common styles for Angular Material
+@include mat.core();
+
+// Define your custom palette
+$primary-palette: (
+    50: hsl(127, 10%, 90%),
+    100: hsl(127, 10%, 85%),
+    200: hsl(127, 10%, 74%),
+    300: hsl(127, 10%, 62%),
+    400: hsl(127, 10%, 50%),
+    500: hsl(127, 10%, 40%),
+    600: hsl(127, 10%, 32%),
+    700: hsl(127, 10%, 25%),
+    800: hsl(127, 10%, 17%),
+    900: hsl(127, 10%, 10%),
+    contrast: (50: rgba(black, 0.87),
+        100: rgba(black, 0.87),
+        200: rgba(black, 0.87),
+        300: rgba(black, 0.87),
+        400: rgba(black, 0.87),
+        500: white,
+        600: white,
+        700: white,
+        800: white,
+        900: white,
+    )
+);
+
+// Define your custom typography config
+$custom-typography: mat.define-typography-config($font-family: 'Roboto, "Helvetica Neue", sans-serif',
+        $headline-1: mat.define-typography-level(32px, 48px, 700),
+        $headline-2: mat.define-typography-level(28px, 42px, 700),
+        $headline-3: mat.define-typography-level(24px, 36px, 700),
+        $headline-4: mat.define-typography-level(20px, 30px, 700),
+        $headline-5: mat.define-typography-level(18px, 27px, 700),
+        $headline-6: mat.define-typography-level(16px, 24px, 700),
+        $body-1: mat.define-typography-level(16px, 24px, 400),
+        $body-2: mat.define-typography-level(14px, 21px, 400),
+        $subtitle-1: mat.define-typography-level(16px, 24px, 500),
+        $subtitle-2: mat.define-typography-level(14px, 21px, 500),
+        $caption: mat.define-typography-level(12px, 18px, 400),
+        $button: mat.define-typography-level(14px, 14px, 500),
+    );
+
+// Define your custom theme
+$custom-theme: mat.define-light-theme((color: (primary: mat.define-palette($primary-palette),
+                accent: mat.define-palette(mat.$pink-palette, A200, A100, A400),
+                warn: mat.define-palette(mat.$red-palette),
+            ),
+            typography: $custom-typography,
+            density: 0,
+        ));
+
+// Apply the custom theme
+@include mat.all-component-themes($custom-theme);
+
+// Custom styles for mat-form-field
+.mat-mdc-form-field {
+    &.custom-sort-field {
+        @include mat.form-field-density(-5); // Even more compact form field
+
+        .mat-mdc-form-field-flex {
+            align-items: center;
+        }
+
+        .mat-mdc-select-arrow {
+            color: mat.get-color-from-palette(map-get($custom-theme, primary), 900);
+        }
+    }
+}
+
+// Custom styles for mat-select
+.mat-mdc-select-panel {
+    @include mat.select-density(0);
+}
+
+// Custom styles for mat-chip
+.mat-mdc-chip {
+    &.mat-primary {
+        background-color: mat.get-color-from-palette(map-get($custom-theme, primary), 100);
+        color: mat.get-color-from-palette(map-get($custom-theme, primary), 900);
+    }
+
+    &.mat-accent {
+        background-color: mat.get-color-from-palette(map-get($custom-theme, accent), 100);
+        color: mat.get-color-from-palette(map-get($custom-theme, accent), 900);
+    }
+
+    &.mat-warn {
+        background-color: mat.get-color-from-palette(map-get($custom-theme, warn), 100);
+        color: mat.get-color-from-palette(map-get($custom-theme, warn), 900);
+    }
+
+    // Custom chip style
+    &.decade-chip {
+        background-color: #fff5ad;
+        color: mat.get-color-from-palette(map-get($custom-theme, primary), 800);
+        border: 1px solid #827e64;
+    }
+
+    // Custom chip style
+    &.genre-chip {
+        background-color: #f4daff;
+        color: mat.get-color-from-palette(map-get($custom-theme, primary), 800);
+        border: 1px solid #76657d;
+    }
+
+    // Custom chip style
+    &.country-chip {
+        background-color: #e7ffd6;
+        color: mat.get-color-from-palette(map-get($custom-theme, primary), 800);
+        border: 1px solid #75866a;
+    }
+
+    // Custom chip style
+    &.director-chip {
+        background-color: #ffcfc2;
+        color: mat.get-color-from-palette(map-get($custom-theme, primary), 800);
+        border: 1px solid #8a6b63;
+    }
+}

@@ -1,0 +1,200 @@
+<div class="toolbar-container">
+    <mat-toolbar class="main-toolbar">
+        <span *ngIf="(isSmallScreen$ | async) === false" class="small-spacer"></span>
+        <div class="page-title">
+            <div class="title-text">
+                META80
+            </div>
+            <button mat-icon-button (click)="onToggleSidenav()">
+                <mat-icon class="animate-icon" [class.rotate-icon]="isSidenavOpen">more</mat-icon>
+            </button>
+            <ng-container *ngIf="(isSmallScreen$ | async) === true">
+                <button mat-button [matMenuTriggerFor]="menu">
+                    <div class="settings-button">
+                        <mat-icon>settings</mat-icon>
+                        <span>MORE</span>
+                    </div>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-menu-item (click)="onDocumentariesToggle.emit()" [disabled]="!showDocumentaries">
+                        <mat-icon>movie</mat-icon> Fiction
+                    </button>
+                    <button mat-menu-item (click)="onDocumentariesToggle.emit()" [disabled]="showDocumentaries">
+                        <mat-icon>videocam</mat-icon> Documentaries
+                    </button>
+                    <button mat-menu-item [ngClass]="{'active': isWatchlistFilter}" (click)="onWatchlistToggle.emit()">
+                        <mat-icon>bookmarks</mat-icon> Watchlist
+                    </button>
+                    <button mat-menu-item [ngClass]="{'active': isSeenlistFilter}" (click)="onSeenlistToggle.emit()">
+                        <mat-icon>beenhere</mat-icon> Seenlist
+                    </button>
+                </mat-menu>
+            </ng-container>
+        </div>
+        <span *ngIf="(isSmallScreen$ | async) === false" class="big-spacer"></span>
+
+        <ng-container *ngIf="(isSmallScreen$ | async) === false">
+            <div class="collapsible-menu">
+                <mat-button-toggle-group [value]="showDocumentaries ? 'documentaries' : 'fiction'"
+                    (change)="onDocumentariesToggle.emit()" aria-label="Toggle between documentaries and fiction"
+                    class="custom-toggle-group">
+                    <mat-button-toggle value="fiction">
+                        <mat-icon>movie</mat-icon>
+                        Fiction
+                    </mat-button-toggle>
+                    <mat-button-toggle value="documentaries">
+                        <mat-icon>videocam</mat-icon>
+                        Documentaries
+                    </mat-button-toggle>
+                </mat-button-toggle-group>
+
+                <span class="small-spacer"></span>
+
+                <button mat-button (click)="onWatchlistToggle.emit()">
+                    <div class="watch-list" [ngClass]="{'active': isWatchlistFilter}">
+                        <mat-icon>bookmarks</mat-icon>
+                        <span>Watchlist</span>
+                    </div>
+                </button>
+
+                <button mat-button (click)="onSeenlistToggle.emit()">
+                    <div class="seen-list" [ngClass]="{'active': isSeenlistFilter}">
+                        <mat-icon>beenhere</mat-icon>
+                        <span>Seenlist</span>
+                    </div>
+                </button>
+            </div>
+        </ng-container>
+
+        <span *ngIf="(isSmallScreen$ | async) === false" class="big-spacer"></span>
+
+        <div *ngIf="!currentUser; else userLoggedIn" class="login-container">
+            <div *ngIf="(isSmallPhone$ | async) === false">
+                <button mat-button (click)="onLoginClick.emit()">
+                    <div class="login-button">
+                        <mat-icon>login</mat-icon>
+                        &#160;Log in
+                    </div>
+                </button>
+                <button mat-button (click)="onRegisterClick.emit()">
+                    <div class="login-button">
+                        <mat-icon class="small-icon">person_add</mat-icon>
+                        &#160;Sign up
+                    </div>
+                </button>
+            </div>
+            <div *ngIf="(isSmallPhone$ | async) === true">
+                <button mat-button [matMenuTriggerFor]="menu">
+                    <div class="username">
+                        <mat-icon>account_circle</mat-icon>
+                    </div>
+                </button>
+                <mat-menu #menu="matMenu">
+                    <button mat-button (click)="onLoginClick.emit()">
+                        <div class="login-button small-phone">
+                            <mat-icon>login</mat-icon>
+                            &#160;Log in
+                        </div>
+                    </button>
+                    <button mat-button (click)="onRegisterClick.emit()">
+                        <div class="login-button small-phone">
+                            <mat-icon class="small-icon">person_add</mat-icon>
+                            &#160;Sign up
+                        </div>
+                    </button>
+                </mat-menu>
+            </div>
+        </div>
+
+        <ng-template #userLoggedIn>
+            <button mat-button [matMenuTriggerFor]="userMenu">
+                <div class="username">
+                    <mat-icon>account_circle</mat-icon>
+                    <span *ngIf="(isSmallPhone$ | async) === false"> {{ currentUser.name }}</span>
+                </div>
+            </button>
+        </ng-template>
+
+        <mat-menu #userMenu="matMenu">
+            <button mat-menu-item disabled>
+                <mat-icon>person</mat-icon>
+                <span>Signed in as {{ currentUser?.name }}</span>
+            </button>
+            <mat-divider></mat-divider>
+            <button mat-menu-item (click)="onLogoutClick.emit()">
+                <mat-icon>exit_to_app</mat-icon>
+                <span>Log out</span>
+            </button>
+        </mat-menu>
+        <span *ngIf="(isSmallScreen$ | async) === false" class="small-spacer"></span>
+    </mat-toolbar>
+
+    <div class="toolbar-extension">
+        <div class="pagination-controls">
+            <button mat-button (click)="onPreviousPage.emit()" [disabled]="currentPage === 1">Previous</button>
+            <div class="page-count">
+                <span class="page-number">Page {{ currentPage }} of {{ totalPages }}</span>
+                <span class="movies-count">{{ totalMovies }} movies</span>
+            </div>
+            <button mat-button (click)="onNextPage.emit()" [disabled]="currentPage === totalPages">Next</button>
+            <div class="website-description" *ngIf="(isSmallScreen$ | async) === false && !hasActiveFilters()">
+                <div class="main-text">This is a list of all movies that have a Metacrtic rating of 80 or higher. </div>
+                <div class="brackets-text">(last updated in August 2024)</div>
+            </div>
+        </div>
+        <div class="active-filters" *ngIf="(isSmallScreen$ | async) === false && hasActiveFilters()">
+            <mat-chip-listbox class="filters-listbox">
+                <mat-chip class="decade-chip" *ngIf="selectedDecade" (removed)="onRemoveDecade.emit()">
+                    {{selectedDecade}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                <mat-chip class="genre-chip" *ngFor="let genre of selectedGenres" (removed)="onRemoveGenre.emit(genre)">
+                    {{genre}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                <mat-chip class="country-chip" *ngFor="let country of selectedCountries"
+                    (removed)="onRemoveCountry.emit(country)">
+                    {{country}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+                <mat-chip class="director-chip" *ngFor="let director of selectedDirectors"
+                    (removed)="onRemoveDirector.emit(director)">
+                    {{director}}
+                    <mat-icon matChipRemove>cancel</mat-icon>
+                </mat-chip>
+            </mat-chip-listbox>
+            <button mat-button color="light" (click)="onClearAllFilters.emit()">Clear All</button>
+        </div>
+        <button mat-button [matMenuTriggerFor]="menu" *ngIf="(isSmallScreen$ | async) === true && hasActiveFilters()"
+            class="filters-button">
+            <mat-icon>filter_alt</mat-icon>
+            <span>FILTERS</span>
+        </button>
+        <mat-menu #menu="matMenu">
+            <div class="filters-content">
+                <mat-chip-listbox>
+                    <mat-chip class="decade-chip" *ngIf="selectedDecade" (removed)="onRemoveDecade.emit()">
+                        {{selectedDecade}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <mat-chip class="genre-chip" *ngFor="let genre of selectedGenres"
+                        (removed)="onRemoveGenre.emit(genre)">
+                        {{genre}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <mat-chip class="country-chip" *ngFor="let country of selectedCountries"
+                        (removed)="onRemoveCountry.emit(country)">
+                        {{country}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                    <mat-chip class="director-chip" *ngFor="let director of selectedDirectors"
+                        (removed)="onRemoveDirector.emit(director)">
+                        {{director}}
+                        <mat-icon matChipRemove>cancel</mat-icon>
+                    </mat-chip>
+                </mat-chip-listbox>
+                <button mat-button color="light" (click)="onClearAllFilters.emit()">Clear All</button>
+            </div>
+        </mat-menu>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+<div class="header">
+    <h2 mat-dialog-title>
+        <span class="title"> {{ movie.tmdbData.title }}</span>
+        <span class="original-title" *ngIf="movie.tmdbData.original_title !== movie.tmdbData.title">
+            ({{ movie.tmdbData.original_title }})
+        </span>
+        <span class="year">({{ movie.omdbData.Year }})</span>
+        <span class="runtime">{{ movie.tmdbData.runtime }} min</span>
+    </h2>
+</div>
+
+<mat-dialog-content>
+    <div class="content">
+        <div class="poster-container">
+            <img [src]="getPosterUrl()" alt="{{ movie.tmdbData.title }} poster" class="poster">
+        </div>
+
+        <div class="details">
+            <p *ngIf="directors.length>0"><strong>Directed by:</strong> {{ directors }}</p>
+            <p *ngIf="writers.length>0"><strong>Written by:</strong> {{ writers }}</p>
+            <p><strong>Genres:</strong> {{ genres }}</p>
+            <p><strong>Production Countries:</strong> {{ productionCountries }}</p>
+            <p *ngIf="spokenLanguages !== 'N/A'"><strong>Spoken Languages:</strong> {{ spokenLanguages }}</p>
+            <p><strong>Overview:</strong> {{ movie.tmdbData.overview }}</p>
+
+            <p *ngIf="budget !== 'N/A'"><strong>Budget:</strong> {{ budget }}</p>
+            <p *ngIf="boxOffice"><strong>Box Office:</strong> {{ boxOffice }}</p>
+            <p *ngIf="imdbLink">
+                <strong>Links:</strong>
+                <a [href]="imdbLink" target="_blank" tabindex="-1"><span>View on IMDb</span></a>
+            </p>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

@@ -1,0 +1,77 @@
+<app-movie-list-layout [opened]="true" [currentSortOption]="state.currentSortOption" [isAscending]="state.isAscending"
+    [sortOptions]="state.sortOptions" (sortChange)="onSortChange($event)" (toggleSortDirection)="toggleSortDirection()">
+    <ng-container toolbar>
+        <app-movie-list-toolbar (toggleSidenav)="layout.toggleSidenav()" [currentUser]="state.currentUser"
+            [showDocumentaries]="state.showDocumentaries" [isWatchlistFilter]="state.isWatchlistFilter"
+            [isSeenlistFilter]="state.isSeenlistFilter" [currentPage]="state.currentPage"
+            [totalPages]="state.totalPages" [totalMovies]="state.totalMovies" [selectedDecade]="state.selectedDecade"
+            [selectedGenres]="state.selectedGenres" [selectedCountries]="state.selectedCountries"
+            [selectedDirectors]="state.selectedDirectors" (onDocumentariesToggle)="toggleDocumentaries()"
+            (onLoginClick)="openLoginDialog()" (onRegisterClick)="openRegisterDialog()" (onLogoutClick)="logout()"
+            (onWatchlistToggle)="toggleWatchlistFilter()" (onSeenlistToggle)="toggleSeenlistFilter()"
+            (onPreviousPage)="loadPreviousPage()" (onNextPage)="loadNextPage()" (onClearAllFilters)="clearAllFilters()"
+            (onToggleSortDirection)="toggleSortDirection()" (onRemoveDecade)="removeDecade()"
+            (onRemoveGenre)="removeGenre($event)" (onRemoveCountry)="removeCountry($event)"
+            (onRemoveDirector)="removeDirector($event)">
+        </app-movie-list-toolbar>
+    </ng-container>
+
+    <ng-container decadeFilter>
+        <div class="decade-grid">
+            <button mat-button *ngFor="let decadeOption of state.decades"
+                (click)="toggleDecadeFilter(decadeOption.decade)"
+                [class.selected]="state.selectedDecade === decadeOption.decade">
+                <div class="decade-button">
+                    <span class="decade-name">
+                        {{ decadeOption.decade }}
+                    </span>
+                    <span class="decade-count">
+                        ({{ decadeOption.count }})
+                    </span>
+                </div>
+            </button>
+        </div>
+    </ng-container>
+
+    <ng-container genreFilter>
+        <div class="filter-container">
+            <button mat-button *ngFor="let genre of state.genres" (click)="toggleGenreFilter(genre._id)"
+                [class.selected]="state.selectedGenres.includes(genre._id)">
+                <div class="filter-button">
+                    <span class="filter-name">{{ genre._id }} </span>
+                    <span class="filter-count">({{ genre.count }})</span>
+                </div>
+            </button>
+        </div>
+    </ng-container>
+
+    <ng-container countryFilter>
+        <div class="filter-container">
+            <button mat-button *ngFor="let country of state.countries" (click)="toggleCountryFilter(country._id)"
+                [class.selected]="state.selectedCountries.includes(country._id)">
+                <div class="filter-button">
+                    <span class="filter-name"> {{ country._id }}</span>
+                    <span class="filter-count"> ({{ country.count }})</span>
+                </div>
+            </button>
+        </div>
+    </ng-container>
+
+    <ng-container directorFilter>
+        <div class="filter-container">
+            <button mat-button *ngFor="let director of state.directors" (click)="toggleDirectorFilter(director._id)"
+                [class.selected]="state.selectedDirectors.includes(director._id)">
+                <div class="filter-button">
+                    <span class="filter-name"> {{ director._id }} </span>
+                    <span class="filter-count"> ({{ director.count }})</span>
+                </div>
+            </button>
+        </div>
+    </ng-container>
+
+    <ng-container mainContent>
+        <div class="movies-grid">
+            <app-movie-card *ngFor="let movie of state.movies" [movie]="movie"></app-movie-card>
+        </div>
+    </ng-container>
+</app-movie-list-layout>

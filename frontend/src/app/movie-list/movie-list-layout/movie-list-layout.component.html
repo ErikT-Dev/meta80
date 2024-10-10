@@ -1,0 +1,50 @@
+<ng-content select="[toolbar]"></ng-content>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #sidenav [opened]="opened" mode="side" opened>
+        <mat-nav-list>
+            <div class="sort-container">
+                <mat-form-field appearance="outline" class="custom-sort-field">
+                    <mat-label>Sort by</mat-label>
+                    <mat-select [(value)]="currentSortOption" (selectionChange)="onSortChange($event.value)"
+                        panelClass="sort-options-panel">
+                        <mat-option *ngFor="let option of sortOptions" [value]="option">
+                            {{ getSortOptionDisplay(option) }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-icon-button (click)="onToggleSortDirection()" class="sort-direction-button">
+                    <mat-icon>{{ isAscending ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
+                </button>
+            </div>
+            <mat-expansion-panel expanded="true" class="filter-panel">
+                <mat-expansion-panel-header class="panel-header">
+                    <mat-panel-title class="panel-title">DECADE</mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-content select="[decadeFilter]"></ng-content>
+            </mat-expansion-panel>
+            <mat-expansion-panel expanded="true" class="filter-panel">
+                <mat-expansion-panel-header class="panel-header">
+                    <mat-panel-title class="panel-title">GENRE</mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-content select="[genreFilter]"></ng-content>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="filter-panel">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="panel-title">COUNTRY</mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-content select="[countryFilter]"></ng-content>
+            </mat-expansion-panel>
+            <mat-expansion-panel class="filter-panel">
+                <mat-expansion-panel-header>
+                    <mat-panel-title class="panel-title">DIRECTOR</mat-panel-title>
+                </mat-expansion-panel-header>
+                <ng-content select="[directorFilter]"></ng-content>
+            </mat-expansion-panel>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="main-content">
+            <ng-content select="[mainContent]"></ng-content>
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

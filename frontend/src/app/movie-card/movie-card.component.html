@@ -1,0 +1,73 @@
+<mat-card class="movie-card" (click)="openMovieDialog()">
+    <div class="card-content">
+
+        <div class="top-panel">
+            <div class="basic-details">
+                <mat-card-title class="movie-title">{{ movie.tmdbData.title }}</mat-card-title>
+                <div class="subtitles">
+                    <mat-card-subtitle>
+                        <span (click)="toggleDecadeFilter($event)" class="clickable movie-year">{{ movie.omdbData.Year
+                            }}</span>
+                        , {{ movie.tmdbData.runtime }} min
+                    </mat-card-subtitle>
+                    <mat-card-subtitle *ngIf="movie.tmdbData.original_title !== movie.tmdbData.title"
+                        class="original-title">
+                        {{ movie.tmdbData.original_title }}
+                    </mat-card-subtitle>
+                </div>
+                <div class="directors">
+                    <span *ngFor="let director of movie.tmdbData?.directors; let last = last" class="director">
+                        <mat-icon>portrait</mat-icon>
+                        <a class="director-link" (click)="toggleDirectorFilter($event, director)">{{ director
+                            }}</a>{{
+                        !last ? ', ' : '' }}
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="middle-panel">
+            <div class="poster-container">
+                <img [src]="movieService.getPosterUrl(movie.tmdbData.poster_path)" [alt]="movie.tmdbData.title"
+                    class="poster-image">
+            </div>
+            <div class="details">
+                <button mat-stroked-button *ngFor="let genre of movie.tmdbData.genres" class="info-button genre-button"
+                    (click)="toggleGenreFilter($event, genre.name)">
+                    {{ genre.name }}
+                </button>
+                <button mat-stroked-button *ngFor="let country of movie.tmdbData.production_countries"
+                    class="info-button country-button" (click)="toggleCountryFilter($event, country.name)">
+                    {{ country.name }}
+                </button>
+            </div>
+        </div>
+        <div class="bottom-panel">
+            <div class="rating mc-rating">
+                <img src="assets/metacritic-logo.png" alt="Metacritic" class="rating-logo">
+                <span>{{ movie.mcRating }}</span>
+            </div>
+            <div class="rating">
+                <img src="assets/rotten-tomatoes-logo.png" alt="Rotten Tomatoes" class="rating-logo">
+                <span>{{ getRottenTomatoesRating() }}</span>
+            </div>
+            <div class="rating">
+                <img src="assets/imdb-logo.png" alt="IMDb" class="rating-logo">
+                <span>{{ movie.omdbData.imdbRating || 'N/A' }}</span>
+            </div>
+            <div class="rating watchlist" [ngClass]="{'watchlist-active': data.isInWatchlist}">
+                <button mat-icon-button (click)="toggleList($event, 'watchlist')">
+                    <mat-icon
+                        [ngClass]="{'watch-icon-active': data.isInWatchlist, 'watch-icon-inactive': !data.isInWatchlist}">
+                        bookmarks
+                    </mat-icon>
+                </button>
+            </div>
+            <div class="rating seenlist" [ngClass]="{'seenlist-active': data.isInSeenlist}">
+                <button mat-icon-button (click)="toggleList($event, 'seenlist')">
+                    <mat-icon
+                        [ngClass]="{'seen-icon-active': data.isInSeenlist, 'seen-icon-inactive': !data.isInSeenlist}">beenhere</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</mat-card>
